@@ -52,23 +52,29 @@ const DominoEffect = () => {
         });
     };
 
+    const isGapTooLarge = (prevPos, currentPos) => {
+        const gap = Math.abs(prevPos - currentPos);
+        return gap >= 50;
+    };
+
     const triggerDominoEffect = () => {
         if (isAnimating) return;
         setIsAnimating(true);
         setShowResult(false);
         lastFallenIndex.current = -1;
         
+        let chainBroken = false;
+        
         dominoRefs.current.forEach((domino, index) => {
             setTimeout(() => {
-                if (!domino) return;
+                if (!domino || chainBroken) return;
 
                 if (index > 0) {
                     const prevPos = positions[index - 1];
                     const currentPos = positions[index];
-                    const gap = Math.abs(prevPos - currentPos);
                     
-                    if (gap >= 50) {
-                        domino.style.transform = `translateY(${positions[index]}px) rotate(15deg)`;
+                    if (isGapTooLarge(prevPos, currentPos)) {
+                        chainBroken = true;
                         lastFallenIndex.current = index - 1;
                         return;
                     }
@@ -81,7 +87,7 @@ const DominoEffect = () => {
 
         // Show result after animation completes
         setTimeout(() => {
-            const isSuccess = lastFallenIndex.current === dominoRefs.current.length - 1;
+            const isSuccess = !chainBroken && lastFallenIndex.current === dominoRefs.current.length - 1;
             setShowResult(true);
             if (isSuccess) {
                 triggerConfetti();
@@ -160,7 +166,7 @@ const DominoEffect = () => {
                     ) : (
                         <>
                             <MessageCircle className={styles.icon} />
-                            Project failed because of bad communication
+                            Due to lack of communication, the project failed
                         </>
                     )}
                 </div>
