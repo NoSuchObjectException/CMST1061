@@ -1,0 +1,229 @@
+/* Move all existing CSS styles here, but replace class names with camelCase */
+.container {
+    max-width: 800px;
+    text-align: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description {
+    color: #64748b;
+    margin-bottom: 3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dominoContainer {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.dominoWrapper {
+    position: relative;
+    padding-top: 60px; /* Add space for controls */
+}
+
+.dominoCard {
+    width: 180px;
+    height: 240px;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    transform-origin: bottom center;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1;
+    background-color: transparent;
+}
+
+.dominoCard:hover {
+    transform: rotate(3deg);
+}
+
+.dominoCard.falling {
+    transform: rotate(90deg);
+}
+
+.dominoCard:nth-child(1) { background-color: #8b5cf6; }
+.dominoCard:nth-child(2) { background-color: #3b82f6; }
+.dominoCard:nth-child(3) { background-color: #06b6d4; }
+.dominoCard:nth-child(4) { background-color: #10b981; }
+
+.bg-violet-500 {
+    background-color: #8b5cf6;
+}
+
+.bg-blue-500 {
+    background-color: #3b82f6;
+}
+
+.bg-cyan-500 {
+    background-color: #06b6d4;
+}
+
+.bg-emerald-500 {
+    background-color: #10b981;
+}
+
+.dominoTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0.75rem 0;
+}
+
+.dominoDescription {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.arrowButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.arrowButton {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: white;
+    color: #3b82f6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.arrowButton:hover {
+    background-color: #f0f9ff;
+}
+
+.arrowButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.positionText {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.triggerButton {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 3;
+}
+
+.triggerButton:hover {
+    background-color: #2563eb;
+}
+
+.triggerButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.statusMessage {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #dcfce7;
+    color: #166534;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 0.5s forwards;
+}
+
+.statusMessage.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes fallAnimation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(90deg); }
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
